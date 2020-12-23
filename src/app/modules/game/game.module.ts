@@ -6,6 +6,8 @@ import { MainPageComponent } from './pages/main-page/main-page.component';
 import { GameRoutingModule } from './game-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
+import { NavigationTokenService } from './shared/services/navigation-token.service';
+import { CanActivateGameUrlService } from './shared/services/can-activate-game-url.service';
 
 
 @NgModule({
@@ -19,6 +21,10 @@ import { SharedModule } from '../../shared/shared.module';
     GameRoutingModule,
     SharedModule,
     TranslateModule.forChild()
+  ],
+  providers: [
+    NavigationTokenService,
+    CanActivateGameUrlService,
   ]
 })
 export class GameModule { }

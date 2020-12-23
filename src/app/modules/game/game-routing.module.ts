@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { OngoingPlayComponent } from './pages/ongoing-play/ongoing-play.component';
 import { AfterPlayComponent } from './pages/after-play/after-play.component';
+import { CanActivateGameUrlService } from './shared/services/can-activate-game-url.service';
 
 const routes: Routes = [
   {
@@ -13,12 +14,14 @@ const routes: Routes = [
   {
     path: 'game',
     pathMatch: 'full',
-    component: OngoingPlayComponent
+    component: OngoingPlayComponent,
+    canActivate: [CanActivateGameUrlService]
   },
   {
     path: 'results',
     pathMatch: 'full',
-    component: AfterPlayComponent
+    component: AfterPlayComponent,
+    canActivate: [CanActivateGameUrlService]
   },
   {
     path: '',

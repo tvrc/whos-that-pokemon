@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { finalize, takeWhile, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { NavigationTokenService } from '../../shared/services/navigation-token.service';
 
 @Component({
   selector: 'app-ongoing-play',
@@ -13,7 +14,8 @@ export class OngoingPlayComponent implements OnInit, OnDestroy {
   timer = 10;
   private timerSub: Subscription;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+              private navigationTokenService: NavigationTokenService) { }
 
   ngOnInit(): void {
     this.setupTimer();
@@ -24,8 +26,14 @@ export class OngoingPlayComponent implements OnInit, OnDestroy {
       .pipe(
         tap(() => --this.timer),
         takeWhile(() => this.timer > 0),
-        finalize(() => this.router.navigate(['results']))
+        finalize(() => this.navigateToResults())
       ).subscribe();
+  }
+
+  private navigateToResults(): void {
+    this.router.navigate(['results'], {
+      ...this.navigationTokenService.getObjectWithNavigationToken()
+    });
   }
 
   ngOnDestroy(): void {
