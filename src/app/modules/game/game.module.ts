@@ -4,6 +4,8 @@ import { OngoingPlayComponent } from './pages/ongoing-play/ongoing-play.componen
 import { AfterPlayComponent } from './pages/after-play/after-play.component';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { GameRoutingModule } from './game-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { GameRoutingModule } from './game-routing.module';
   ],
   imports: [
     CommonModule,
-    GameRoutingModule
+    GameRoutingModule,
+    SharedModule,
+    TranslateModule.forChild()
   ]
 })
 export class GameModule { }
