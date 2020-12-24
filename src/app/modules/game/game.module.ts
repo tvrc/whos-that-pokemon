@@ -8,6 +8,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../shared/shared.module';
 import { NavigationTokenService } from './shared/services/navigation-token.service';
 import { CanActivateGameUrlService } from './shared/services/can-activate-game-url.service';
+import { OngoingPlayService } from './pages/ongoing-play/services/ongoing-play.service';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { CanActivateGameUrlService } from './shared/services/can-activate-game-u
   providers: [
     NavigationTokenService,
     CanActivateGameUrlService,
+    OngoingPlayService
   ]
 })
 export class GameModule { }

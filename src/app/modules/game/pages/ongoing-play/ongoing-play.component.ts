@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
 import { finalize, takeWhile, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { NavigationTokenService } from '../../shared/services/navigation-token.service';
+import { PokemonDTO } from './model/pokemon-dto';
+import { OngoingPlayService } from './services/ongoing-play.service';
 
 @Component({
   selector: 'app-ongoing-play',
@@ -13,11 +15,15 @@ export class OngoingPlayComponent implements OnInit, OnDestroy {
 
   timer = 10;
   private timerSub: Subscription;
+  pokemonResult$: BehaviorSubject<PokemonDTO>;
 
   constructor(private router: Router,
-              private navigationTokenService: NavigationTokenService) { }
+              private navigationTokenService: NavigationTokenService,
+              private ongoingPlayService: OngoingPlayService) { }
 
   ngOnInit(): void {
+    this.pokemonResult$ = this.ongoingPlayService.pokemonResult$;
+    this.ongoingPlayService.retrievePokemon();
     this.setupTimer();
   }
 

@@ -1,1 +1,6 @@
 <span>{{ timer }}<span>
+<ng-container *ngIf="(pokemonResult$ | async) as pokemon">
+  <span>{{pokemon.name}}</span>
+  <img style="width: 200px" [src]="pokemon.imageUrl" />
+</ng-container>
+
